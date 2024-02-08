@@ -2006,11 +2006,12 @@ packages:
   pdf:
     dependency: "direct main"
     description:
-      name: pdf
-      sha256: "9f75fc7f5580ea5e635b5724de58fb27f684c9ad03ed46fdc1aac768e4557315"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.10.4"
+      path: "printing"
+      ref: 0bdb6a03f75aeb69cb2666d6aea80d8147579b22
+      resolved-ref: 0bdb6a03f75aeb69cb2666d6aea80d8147579b22
+      url: "https://github.com/CyborgPotato/dart_pdf"
+    source: git
+    version: "3.10.7"
   peanut:
     dependency: "direct dev"
     description:
