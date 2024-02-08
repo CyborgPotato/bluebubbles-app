@@ -11,12 +11,7 @@
         version = "1.12.7+61";
         targetFlutterPlatform = "linux";
         
-        src = pkgs.fetchFromGitHub {
-          owner = "CyborgPotato";
-          repo = "bluebubbles-app";
-          rev = "dd0c07715ea35a476e82b7c53d0e3260b0f39158";
-          hash = "sha256-AxVgdA/T+qhCw03T5f3qz1mJDAHHkwYIkViEdIavQjQ=";
-        };
+        src = ./.;
 
         gitHashes = {
           desktop_webview_auth = "sha256-knLo1ERnMXXaDgUJwNR+xRcrsH2YRA3VpCcBwCCOiVg=";
@@ -40,8 +35,14 @@
             url = "https://github.com/bblanchon/pdfium-binaries/releases/download/chromium/${PDFIUM_VERSION}/pdfium-linux-${PDFIUM_ARCH}.tgz";
             hash = "sha256-Dmjn8MdhmltKkUMfrVFtZlzFLww0HXAbIarXGmxtQdk=";
           };
+
+          OBJECTBOX_VERSION = "2.2.1";
+          OBJECTBOX_ARCH = "x64";
+          objectbox = "https://github.com/objectbox/objectbox-c/releases/download/v${OBJECTBOX_VERSION}/objectbox-linux-${OBJECTBOX_ARCH}.tar.gz";
         in ''
           awk '/MIMALLOC_LIB/ { print; print "set(PDFIUM_URL \"file://${pdfium}\")"; next }1' linux/CMakeLists.txt > tmp_cmake
+          mv tmp_cmake linux/CMakeLists.txt
+          awk '/MIMALLOC_LIB/ { print; print "FetchContent_SetPopulated(objectbox-download SOURCE_DIR ${objectbox})"; next }1' linux/CMakeLists.txt > tmp_cmake
           mv tmp_cmake linux/CMakeLists.txt
         '';
         

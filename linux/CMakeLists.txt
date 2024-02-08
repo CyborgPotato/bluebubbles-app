@@ -90,6 +90,12 @@ set_target_properties(${BINARY_NAME}
 # them to the application.
 include(flutter/generated_plugins.cmake)
 
+include(FetchContent)
+FetchContent_Declare(
+    objectbox-download
+    URL https://github.com/objectbox/objectbox-c/releases/download/v2.2.1/objectbox-linux-x64.tar.gz
+)
+
 target_link_libraries(${BINARY_NAME} PRIVATE ${MIMALLOC_LIB})
 
 # === Installation ===
